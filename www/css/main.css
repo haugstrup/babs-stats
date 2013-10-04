@@ -1,0 +1,198 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+html {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+html, body {
+    font-family: 'Muli', sans-serif;
+    font-weight:300;
+    color:#555;
+}
+
+#main {
+    width:990px;
+    margin:0 auto;
+}
+
+header {
+    margin:50px 0;
+}
+
+h1 {
+    text-align:center;
+    font-size:3em;
+    font-weight:400;
+    margin-bottom:0;
+}
+
+.meta {
+    font-size:0.8em;
+    text-align:center;
+}
+
+h2 {
+    font-weight:300;
+    text-align:center;
+    margin:0 0 15px;
+}
+
+.tile {
+    float:left;
+    overflow:hidden;
+    margin-bottom:40px;
+}
+
+.tile-1 {
+    width:290px;
+    margin-left:45px;
+}
+
+.tile-2 {
+    width:625px;
+    margin-left:45px;
+}
+
+.tile-3 {
+    width:960px;
+}
+
+.no-margin {
+    margin-left:0;
+}
+
+.number-tile {
+    box-sizing:border-box;
+    padding:30px 15px;
+
+    background:#eee;
+    font-size:20px;
+    text-align:center;
+
+    min-height:184px;
+}
+.number-tile.no-header .count {
+    margin-bottom:0;
+    display:inline-block;
+    vertical-align: middle;
+    line-height:144px;
+
+    font-size:7em;
+}
+.number-tile .count {
+    font-size: 4em;
+    font-weight:400;
+    margin-bottom:15px;
+}
+.number-tile .unit {
+    font-size: 20px;
+    margin-left:4px;
+}
+
+table {
+    line-height:200%;
+    width:100%;
+    border-collapse:separate;
+}
+th {
+    font-weight:400;
+    text-decoration:underline;
+}
+td.number {
+    text-align:center;
+}
+
+footer {
+    clear:both;
+    margin-top:80px;
+    text-align:right;
+    font-size:0.7em;
+    padding-bottom:15px;
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}

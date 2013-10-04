@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bay Area Bike Share Stats</title>
+    <link href='http://fonts.googleapis.com/css?family=Muli:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+  </head>
+  <body>
+
+    <div id="main">
+      <header>
+        <h1>Bay Area Bike Share Stats</h1>
+        <div class="meta" id="meta"></div>
+      </header>
+
+      <div class="no-margin number-tile no-header tile-1 tile">
+        <div class="count"><span id="total-trips"></span><span class="unit">trips</span></div>
+      </div>
+      <div class="number-tile tile-1 tile">
+        <div class="count" id="total-duration"></div>
+        <h2>spent biking</h2>
+      </div>
+      <div class="number-tile tile-1 tile">
+        <h2>Average trip</h2>
+        <div class="count"><span id="average-duration"></span><span class="unit">min</span></div>
+      </div>
+
+      <div class="no-margin tile-2 tile">
+        <h2>Popular Routes</h2>
+        <div id="popular-routes"></div>
+      </div>
+
+      <div class="tile-1 tile">
+        <h2>Popular stations</h2>
+        <div id="popular-stations"></div>
+      </div>
+
+      <footer>
+        Made by <a href="http://solitude.dk/">Andreas Haugstrup Pedersen</a>. I'm not affiliated with <a href="http://bayareabikeshare.com">Bay Area Bike Share</a>. Just a big fan.
+      </footer>
+
+    </div>
+
+    <script data-main="js/main" src="js/require.js"></script>
+
+  </body>
+</html>
