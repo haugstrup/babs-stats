@@ -25,7 +25,7 @@ define(['babs'], function(Babs) {
 
     barChartTemplate: _.template('<div class="bar-chart" title="<%= value %>% of trips"><div class="bar" style="width:<%= value %>%;"></div><div class="label"><%= label %></div></div>'),
 
-    tripSummaryTemplate: _.template('<div class="trip-summary"><div class="date"><%= date %></div><div class="route"><%= start %>&nbsp;&rarr;&nbsp;<%= end %></div><div class="duration"><%= duration %></div></div>'),
+    tripSummaryTemplate: _.template('<div class="trip-summary"><div class="route start"><%= start %></div><div class="route middle">&darr;</div><div class="route end"><%= end %></div><div class="duration">duration: <%= duration %></div><div class="date"><%= date %></div></div>'),
 
     populateMeta: function() {
       $('#meta').html(this.metaTemplate({

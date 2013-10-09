@@ -36,8 +36,6 @@ Since the data file is loaded asynchronously you can't server the HTML file unde
 
 * Split babs.rb and babs.js into separate components for people that only want an API
 
-* View data for the last trip recorded (date, start station, end station, duration)
-
 Possible bar charts:
 * Number of trips per weekday
 * Trip durations per week

@@ -117,7 +117,7 @@ h2 {
     box-sizing:border-box;
     float:left;
     overflow:hidden;
-    margin-bottom:40px;
+    margin-bottom:15px;
     background:#fff;
     border-radius:5px;
     border:1px solid #ccc;
@@ -234,20 +234,32 @@ footer a, footer a:visited {
     line-height:35px;
 }
 
-.trip-summary .route {
-    font-size:32px;
-    line-height:40px;
-    font-weight:400;
+.trip-summary {
+    padding-top:10px;
     text-align:center;
+}
+.trip-summary .route {
+    font-size:44px;
+    line-height:48px;
+    font-weight:400;
+    color:#82C7BC;
+}
+.trip-summary .route.middle {
+    margin:15px 0;
+    color:#ddd;
 }
 
 .trip-summary .date,
 .trip-summary .duration {
-    font-size:0.7em;
+    margin-top:20px;
+    font-size:11px;
+    line-height:11px;
     color:#999;
+    text-align:left;
+    float:left;
 }
 .trip-summary .duration {
-    text-align:right;
+    float:right;
 }
 
 /* ==========================================================================
