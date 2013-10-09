@@ -6,6 +6,9 @@ define(function() {
     var trips = options.trips || [];
     this.trips = trips;
 
+    var stations = options.stations || [];
+    this.stations = stations;
+
     this.count = function() {
       return trips.length;
     };
@@ -20,12 +23,38 @@ define(function() {
       return Math.floor((totalDuration/this.count())/60);
     };
 
-    this.topStations = function() {
+    this.byDuration = function() {
+      return _.sortBy(trips, function(trip){
+        return trip.duration;
+      });
+    },
+
+    this.byId = function() {
+      return _.sortBy(trips, function(trip){
+        return trip.id;
+      });
+    },
+
+    this.totalStationCount = function() {
+      return stations.length;
+    },
+
+    this.stationList = function() {
       var stations = [];
-      _.each(trips, function(station) {
+      _.each(trips, function(station){
         stations.push(station.start_station);
         stations.push(station.end_station);
       });
+      return stations;
+    },
+
+    this.visitedStationCount = function() {
+      var stations = _.uniq(this.stationList());
+      return stations.length;
+    },
+
+    this.topStations = function() {
+      var stations = this.stationList();
 
       stations = _.countBy(stations, function(name){
         return name;
@@ -39,14 +68,14 @@ define(function() {
         return station.count*-1;
       });
 
-      return _.first(stations, 6);
+      return _.first(stations, 5);
     };
 
     this.topRoutes = function() {
       var routes = {};
 
       _.each(trips, function(trip) {
-        var stations = [trip.start_station, trip.end_station].sort();
+        var stations = [trip.start_station, trip.end_station];
         var key = stations.join('::');
         if (routes[key]) {
           routes[key].count++;

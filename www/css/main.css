@@ -82,6 +82,8 @@ html, body {
     font-family: 'Muli', sans-serif;
     font-weight:300;
     color:#555;
+    font-size:16px;
+    background:#eee;
 }
 
 #main {
@@ -112,59 +114,33 @@ h2 {
 }
 
 .tile {
+    box-sizing:border-box;
     float:left;
     overflow:hidden;
     margin-bottom:40px;
+    background:#fff;
+    border-radius:5px;
+    border:1px solid #ccc;
+    padding:15px;
 }
 
 .tile-1 {
-    width:290px;
-    margin-left:45px;
+    width:310px;
+    margin-left:15px;
 }
 
 .tile-2 {
-    width:625px;
-    margin-left:45px;
-}
-
-.tile-3 {
-    width:960px;
+    width:655px;
+    margin-left:15px;
 }
 
 .no-margin {
     margin-left:0;
-}
-
-.number-tile {
-    box-sizing:border-box;
-    padding:30px 15px;
-
-    background:#eee;
-    font-size:20px;
-    text-align:center;
-
-    min-height:184px;
-}
-.number-tile.no-header .count {
-    margin-bottom:0;
-    display:inline-block;
-    vertical-align: middle;
-    line-height:144px;
-
-    font-size:7em;
-}
-.number-tile .count {
-    font-size: 4em;
-    font-weight:400;
-    margin-bottom:15px;
-}
-.number-tile .unit {
-    font-size: 20px;
-    margin-left:4px;
+    clear:left;
 }
 
 table {
-    line-height:200%;
+    line-height:35px;
     width:100%;
     border-collapse:separate;
 }
@@ -172,16 +148,106 @@ th {
     font-weight:400;
     text-decoration:underline;
 }
-td.number {
+th:first-child {
+    text-align:left;
+}
+td.number, td.sparkline {
     text-align:center;
+}
+div.sparkline {
+    height:15px;
+    display:inline-block;
+    vertical-align: middle;
+    margin-right:10px;
+}
+
+div.pie {
+    display:inline-block;
+    vertical-align: middle;
+    height:25px;
+}
+
+dl {
+    overflow:hidden;
+    margin:0;
+}
+dl:first-child {
+    border-bottom:1px solid #eee;
+    padding-bottom:10px;
+    margin-bottom:10px;
+}
+
+dt, dd {
+    display:block;
+    float:left;
+    margin:0;
+    line-height:35px;
+}
+dt {
+    width:140px;
+}
+
+dd {
+    font-weight:400;
+    width:118px;
+    text-align:right;
 }
 
 footer {
     clear:both;
-    margin-top:80px;
-    text-align:right;
+    margin-top:120px;
+    text-align:center;
     font-size:0.7em;
-    padding-bottom:15px;
+    padding-bottom:40px;
+}
+footer a, footer a:visited {
+    color:#82C7BC;
+    font-weight:400;
+}
+
+.bar-chart-tile {
+    padding-left:25px;
+    padding-right:25px;
+}
+
+.bar-chart {
+    position:relative;
+    height:35px;
+    overflow:hidden;
+    background:#eee;
+    font-weight:400;
+    margin:10px 0;
+    border-radius:10px;
+}
+.bar-chart .bar {
+    position:absolute;
+    top:0;
+    left:0;
+    background:#82C7BC;
+    height:100%;
+}
+.bar-chart .label {
+    position:absolute;
+    top:0;
+    left:10px;
+    white-space:nowrap;
+    line-height:35px;
+}
+
+.trip-summary .route {
+    font-size:32px;
+    line-height:40px;
+    font-weight:400;
+    text-align:center;
+}
+
+.trip-summary .date,
+.trip-summary .duration {
+    font-size:0.7em;
+    color:#999;
+}
+.trip-summary .duration {
+    text-align:right;
 }
 
 /* ==========================================================================

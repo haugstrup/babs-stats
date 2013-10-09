@@ -20,7 +20,7 @@ You must have the following gems installed:
 
 Run it as `ruby utils/babs.rb`
 
-## Looking at your stats
+## Viewing your stats
 There's a small JS app that will display your stats for you. Currently the following data is generated:
 
 * Amount of trips taken
@@ -34,20 +34,16 @@ Since the data file is loaded asynchronously you can't server the HTML file unde
 
 # TODO
 
-* Make design pretty
-* Make app.js pretty
 * Split babs.rb and babs.js into separate components for people that only want an API
 
-Possible numbers:
-* % of stations that has been visited in a given area
+* View data for the last trip recorded (date, start station, end station, duration)
 
 Possible bar charts:
-* Number of trips per hour of day
 * Number of trips per weekday
-* Number of trips per month
+* Trip durations per week
 
-Other:
-* jQuery sparkline to show timeline of trip durations
+Map:
+* View visited stations on a google map
 
 Grunt work:
 * fetch -- run babs.rb for you
