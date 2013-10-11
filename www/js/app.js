@@ -25,7 +25,7 @@ define(['babs'], function(Babs) {
 
     barChartTemplate: _.template('<div class="bar-chart" title="<%= value %>% of trips involved this station"><div class="bar" style="width:<%= value %>%;"></div><div class="label"><%= label %></div></div>'),
 
-    tripSummaryTemplate: _.template('<div class="trip-summary"><div class="route start"><%= start %></div><div class="route middle">&darr;</div><div class="route end"><%= end %></div><div class="duration">duration: <%= duration %></div><div class="date"><%= date %></div></div>'),
+    tripSummaryTemplate: _.template('<div class="trip-summary"><div class="route start"><%= start %></div><div class="route middle">&darr;</div><div class="route end"><%= end %></div><div class="duration"><%= duration %></div><div class="date"><%= date %></div></div>'),
 
     populateMeta: function() {
       $('#meta').html(this.metaTemplate({
@@ -44,11 +44,10 @@ define(['babs'], function(Babs) {
 
       var visitedStationCount = this.trips.visitedStationCount();
       var totalStationCount = this.trips.totalStationCount();
-      var countString = visitedStationCount + ' of ' + totalStationCount + ' stations visited.';
-      var pie = "<div class='pie' title='"+countString+"'>" + [visitedStationCount, totalStationCount-visitedStationCount].join(',') + "</div>";
+      var pie = "<div class='pie'>" + [visitedStationCount, totalStationCount-visitedStationCount].join(',') + "</div>";
 
       $('#total').text(this.trips.count() + ' trips');
-      $('#average-duration').text(this.trips.averageDuration() + ' min');
+      $('#average-duration').text(this.trips.averageDuration() + ' mins');
       $('#shortest').html('<span title="'+shortest.start_station+' &rarr; '+shortest.end_station+'">' + this.secondsToString(shortest.duration) + '</span>');
       $('#longest').html('<span title="'+longest.start_station+' &rarr; '+longest.end_station+'">' + this.secondsToString(longest.duration) + '</span>');
       $('#first').html('<span title="'+longest.start_station+' &rarr; '+longest.end_station+'">' + moment(first.start_date).format('MMM D, YYYY') + '</span>');
@@ -60,7 +59,14 @@ define(['babs'], function(Babs) {
         height:25,
         sliceColors: ['#82C7BC', '#dddddd'],
         offset: '-90',
-        disableInteraction: true
+        disableHighlight: true,
+        tooltipFormatter: function(sparklines, options, fields) {
+          if (fields.offset === 0) {
+            return fields.value + ' stations visited ('+Math.round(fields.percent)+'%)';
+          } else {
+            return fields.value + ' stations not yet visited ('+Math.round(fields.percent)+'%)';
+          }
+        }
       });
 
     },
@@ -73,31 +79,28 @@ define(['babs'], function(Babs) {
         start: trip.start_station,
         end: trip.end_station,
         date: moment(trip.start_date).format('MMM D, YYYY'),
-        duration: this.secondsToString(trip.duration)
+        duration: this.secondsToString(trip.duration, 'verbose')
       }));
 
     },
 
     populatePopularRoutes: function(topRoutes) {
+      var self = this;
+
       $('#popular-routes').html(this.tableTemplate({
         className: 'popular-routes',
         headers: [
           'Stations',
-          // 'Count',
-          // 'Avg. Duration'
           'Duration'
         ],
         rows: _.map(topRoutes, function(route){
-          // var routeTrips = new Babs({trips: route.trips});
           var lastTrip = _.clone(route.trips).pop();
 
           var sparkline = "<div class='sparkline'>" + _.pluck(route.trips, 'duration').join(',') + "</div>";
 
           return [
             {text: _.escape(route.stations[0]) + '&nbsp;&rarr;&nbsp;' + _.escape(route.stations[1])},
-            // {text: routeTrips.count(), className: 'number'},
-            // {text: routeTrips.averageDuration() + '&nbsp;min', className: 'number'}
-            {text: sparkline + Math.floor(lastTrip.duration/60) + '&nbsp;min', className: 'sparkline'}
+            {text: sparkline + Math.floor(lastTrip.duration/60) + '&nbsp;mins', className: 'sparkline'}
           ];
         }, this)
       }));
@@ -111,8 +114,10 @@ define(['babs'], function(Babs) {
         minSpotColor: false,
         maxSpotColor: false,
         highlightSpotColor: false,
-        highlightLineColor: false,
-        disableInteraction: true
+        highlightLineColor: '#ccc',
+        tooltipFormatter: function(sparklines, options, fields) {
+          return self.secondsToString(fields.y, 'verbose');
+        }
       });
 
     },
@@ -126,7 +131,8 @@ define(['babs'], function(Babs) {
     },
 
     // Helpers
-    secondsToString: function(seconds) {
+    secondsToString: function(seconds, type) {
+      type = type || 'concise';
       var hours = Math.floor(seconds/3600);
       var minutes = Math.floor((seconds-(hours*3600))/60);
       var remaining_seconds = Math.floor(seconds-(hours*3600)-(minutes*60));
@@ -137,16 +143,14 @@ define(['babs'], function(Babs) {
 
       var parts = [];
       if (hours > 0) {
-        parts.push(pad(hours));
+        parts.push(type === 'verbose' ? (hours === 1 ? '1 hr' : hours + ' hrs') : pad(hours));
       }
       if (minutes > 0) {
-        parts.push(pad(minutes));
+        parts.push(type === 'verbose' ? (minutes === 1 ? '1 min' : minutes + ' mins') : pad(minutes));
       }
-      if (remaining_seconds > 0) {
-        parts.push(pad(remaining_seconds));
-      }
+      parts.push(type === 'verbose' ? (remaining_seconds === 1 ? '1 sec' : remaining_seconds + ' secs') : pad(remaining_seconds));
 
-      return parts.join(':');
+      return type === 'verbose' ? parts.join(' ') : parts.join(':');
     }
   };
 });
