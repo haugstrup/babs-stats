@@ -23,7 +23,7 @@ define(['babs'], function(Babs) {
 
     metaTemplate: _.template('Prepared for <%= name %>. Last updated <%= updated_on.fromNow() %>.'),
 
-    barChartTemplate: _.template('<div class="bar-chart" title="<%= value %>% of trips"><div class="bar" style="width:<%= value %>%;"></div><div class="label"><%= label %></div></div>'),
+    barChartTemplate: _.template('<div class="bar-chart" title="<%= value %>% of trips involved this station"><div class="bar" style="width:<%= value %>%;"></div><div class="label"><%= label %></div></div>'),
 
     tripSummaryTemplate: _.template('<div class="trip-summary"><div class="route start"><%= start %></div><div class="route middle">&darr;</div><div class="route end"><%= end %></div><div class="duration">duration: <%= duration %></div><div class="date"><%= date %></div></div>'),
 
@@ -45,13 +45,13 @@ define(['babs'], function(Babs) {
       var visitedStationCount = this.trips.visitedStationCount();
       var totalStationCount = this.trips.totalStationCount();
       var countString = visitedStationCount + ' of ' + totalStationCount + ' stations visited.';
-      var pie = "<div class='pie' title='"+countString+"'>" + [visitedStationCount, totalStationCount].join(',') + "</div>";
+      var pie = "<div class='pie' title='"+countString+"'>" + [visitedStationCount, totalStationCount-visitedStationCount].join(',') + "</div>";
 
       $('#total').text(this.trips.count() + ' trips');
       $('#average-duration').text(this.trips.averageDuration() + ' min');
-      $('#shortest').html(this.secondsToString(shortest.duration));
-      $('#longest').html(this.secondsToString(longest.duration));
-      $('#first').html(moment(first.start_date).format('MMM D, YYYY'));
+      $('#shortest').html('<span title="'+shortest.start_station+' &rarr; '+shortest.end_station+'">' + this.secondsToString(shortest.duration) + '</span>');
+      $('#longest').html('<span title="'+longest.start_station+' &rarr; '+longest.end_station+'">' + this.secondsToString(longest.duration) + '</span>');
+      $('#first').html('<span title="'+longest.start_station+' &rarr; '+longest.end_station+'">' + moment(first.start_date).format('MMM D, YYYY') + '</span>');
       $('#total-duration').html(this.secondsToString(this.trips.duration()));
       $('#station-count').html(pie);
 
