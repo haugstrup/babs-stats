@@ -18,7 +18,7 @@ You must have the following gems installed:
 * nokogiri
 * oj
 
-Run it as `ruby utils/babs.rb`
+Run it with grunt `grunt fetch`
 
 ## Viewing your stats
 There's a small JS app that will display your stats for you. Currently the following data is generated:
@@ -45,5 +45,4 @@ Map:
 * View visited stations on a google map
 
 Grunt work:
-* fetch -- run babs.rb for you
 * deploy -- rsync/scp www files to server
