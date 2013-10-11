@@ -1,1 +1,3 @@
 www/babs.json
+node_modules
+build/*

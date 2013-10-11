@@ -3,7 +3,7 @@ require.config({
     jquery: 'vendor/jquery.min',
     underscore: 'vendor/underscore-min',
     moment: 'vendor/moment.min',
-    sparkline: 'vendor/jquery.sparkline.min',
+    sparkline: 'vendor/jquery.sparkline',
     tipsy: 'vendor/jquery.tipsy',
     babs: 'lib/babs'
   },
@@ -11,13 +11,14 @@ require.config({
     'underscore': {
       exports: '_'
     },
+    'sparkline': ['jquery'],
     'app': {
       deps: ['underscore', 'jquery', 'moment', 'sparkline', 'tipsy']
     }
   }
 });
 
-require(['app'], function(app) {
+require(['app', 'sparkline'], function(app) {
 
   $.getJSON('babs.json', {}, function(data){
     app.init(data);

@@ -35,6 +35,7 @@ Since the data file is loaded asynchronously you can't server the HTML file unde
 # TODO
 
 * Split babs.rb and babs.js into separate components for people that only want an API
+* Rewrite babs.rb as a node.js module so everything is in javascript. Module should export a grunt task
 
 Possible bar charts:
 * Number of trips per weekday
@@ -45,5 +46,4 @@ Map:
 
 Grunt work:
 * fetch -- run babs.rb for you
-* deploy -- scp www files to server
-  * use requirejs optimizer for js files
+* deploy -- rsync/scp www files to server
