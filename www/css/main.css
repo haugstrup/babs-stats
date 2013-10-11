@@ -1,276 +1,182 @@
-/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
-
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
-
-html,
-button,
-input,
-select,
-textarea {
-    color: #222;
-}
-
-html {
-    font-size: 1em;
-    line-height: 1.4;
-}
-
-/*
- * Remove text-shadow in selection highlight: h5bp.com/i
- * These selection rule sets have to be separate.
- * Customize the background color to match your design.
- */
-
-::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-::selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-/*
- * A better looking default horizontal rule
- */
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
-
-/*
- * Remove the gap between images, videos, audio and canvas and the bottom of
- * their containers: h5bp.com/i/440
- */
-
-audio,
-canvas,
-img,
-video {
-    vertical-align: middle;
-}
-
-/*
- * Remove default fieldset styles.
- */
-
-fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
 html, body {
-    font-family: 'Muli', sans-serif;
-    font-weight:300;
-    color:#555;
-    font-size:16px;
-    background:#eee;
+  font-family: 'Muli', sans-serif;
+  font-weight:300;
+  color:#555;
+  font-size:16px;
+  line-height:1.4;
+  background:#eee;
+  margin:0;
 }
 
 #main {
-    width:990px;
-    margin:0 auto;
+  width:990px;
+  margin:0 auto;
 }
 
 header {
-    margin:50px 0;
+  margin:50px 0;
 }
 
 h1 {
-    text-align:center;
-    font-size:3em;
-    font-weight:400;
-    margin-bottom:0;
+  text-align:center;
+  font-size:3em;
+  font-weight:400;
+  margin:30px 0 0 0;
 }
 
 .meta {
-    font-size:0.8em;
-    text-align:center;
+  font-size:0.8em;
+  text-align:center;
 }
 
 h2 {
-    font-weight:300;
-    text-align:center;
-    margin:0 0 15px;
+  font-weight:300;
+  text-align:center;
+  margin:0 0 15px 0;
 }
 
 .tile {
-    box-sizing:border-box;
-    float:left;
-    overflow:hidden;
-    margin-bottom:15px;
-    background:#fff;
-    border-radius:5px;
-    border:1px solid #ccc;
-    padding:15px;
+  box-sizing:border-box;
+  float:left;
+  overflow:hidden;
+  margin:0 0 15px 15px;
+  background:#fff;
+  border-radius:5px;
+  border:1px solid #ccc;
+  padding:15px;
 }
 
 .tile-1 {
-    width:310px;
-    margin-left:15px;
+  width:310px;
 }
 
 .tile-2 {
-    width:655px;
-    margin-left:15px;
+  width:655px;
 }
 
 .no-margin {
-    margin-left:0;
-    clear:left;
+  margin-left:0;
+  clear:left;
 }
 
 table {
-    line-height:35px;
-    width:100%;
-    border-collapse:separate;
+  line-height:35px;
+  width:100%;
+  border-collapse:separate;
+  border-spacing: 0;
 }
 th {
-    font-weight:400;
-    text-decoration:underline;
+  font-weight:400;
+  text-decoration:underline;
 }
 th:first-child {
-    text-align:left;
+  text-align:left;
 }
 td.number, td.sparkline {
-    text-align:center;
+  text-align:center;
 }
 div.sparkline {
-    height:15px;
-    display:inline-block;
-    vertical-align: middle;
-    margin-right:10px;
+  height:15px;
+  display:inline-block;
+  vertical-align: middle;
+  margin-right:10px;
 }
 
 div.pie {
-    display:inline-block;
-    vertical-align: middle;
-    height:25px;
+  display:inline-block;
+  vertical-align: middle;
+  height:25px;
 }
 
 dl {
-    overflow:hidden;
-    margin:0;
+  overflow:hidden;
+  margin:0;
+  padding:0;
 }
 dl:first-child {
-    border-bottom:1px solid #eee;
-    padding-bottom:10px;
-    margin-bottom:10px;
+  border-bottom:1px solid #eee;
+  padding-bottom:10px;
+  margin-bottom:10px;
 }
-
 dt, dd {
-    display:block;
-    float:left;
-    margin:0;
-    line-height:35px;
+  display:block;
+  float:left;
+  margin:0;
+  line-height:35px;
 }
 dt {
-    width:140px;
+  width:140px;
 }
-
 dd {
-    font-weight:400;
-    width:118px;
-    text-align:right;
+  width:118px;
+  font-weight:400;
+  text-align:right;
 }
 
 footer {
-    clear:both;
-    margin-top:120px;
-    text-align:center;
-    font-size:0.7em;
-    padding-bottom:40px;
+  display:block;
+  clear:both;
+  padding:40px 0;
+  text-align:center;
+  font-size:0.7em;
 }
 footer a, footer a:visited {
-    color:#82C7BC;
-    font-weight:400;
+  color:#82C7BC;
+  font-weight:400;
 }
 
 .bar-chart-tile {
-    padding-left:25px;
-    padding-right:25px;
+  padding:0 25px;
 }
 
 .bar-chart {
-    position:relative;
-    height:35px;
-    overflow:hidden;
-    background:#eee;
-    font-weight:400;
-    margin:10px 0;
-    border-radius:10px;
+  position:relative;
+  height:35px;
+  overflow:hidden;
+  background:#eee;
+  font-weight:400;
+  margin:10px 0;
+  border-radius:10px;
 }
 .bar-chart .bar {
-    position:absolute;
-    top:0;
-    left:0;
-    background:#82C7BC;
-    height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  background:#82C7BC;
+  height:100%;
 }
 .bar-chart .label {
-    position:absolute;
-    top:0;
-    left:10px;
-    white-space:nowrap;
-    line-height:35px;
+  position:absolute;
+  top:0;
+  left:10px;
+  white-space:nowrap;
+  line-height:35px;
 }
 
 .trip-summary {
-    padding-top:10px;
-    text-align:center;
+  padding-top:10px;
+  text-align:center;
 }
 .trip-summary .route {
-    font-size:44px;
-    line-height:48px;
-    font-weight:400;
-    color:#82C7BC;
+  font-size:44px;
+  line-height:48px;
+  font-weight:400;
+  color:#82C7BC;
 }
 .trip-summary .route.middle {
-    margin:15px 0;
-    color:#ddd;
+  margin:15px 0;
+  color:#ddd;
 }
 
 .trip-summary .date,
 .trip-summary .duration {
-    margin-top:20px;
-    font-size:11px;
-    line-height:11px;
-    color:#999;
-    text-align:left;
-    float:left;
+  margin-top:20px;
+  font-size:11px;
+  line-height:11px;
+  color:#999;
+  text-align:left;
+  float:left;
 }
 .trip-summary .duration {
-    float:right;
-}
-
-/* ==========================================================================
-   Helper classes
-   ========================================================================== */
-
-/*
- * Hide from both screenreaders and browsers: h5bp.com/u
- */
-
-.hidden {
-    display: none !important;
-    visibility: hidden;
+  float:right;
 }
