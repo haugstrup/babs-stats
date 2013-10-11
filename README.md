@@ -36,9 +36,6 @@ Since the data file is loaded asynchronously you can't server the HTML file unde
 
 * Split babs.rb and babs.js into separate components for people that only want an API
 
-* Use Tipsy for nicer tooltips
-* Bring back interaction for tooltips for sparklines (format them to look nice)
-
 Possible bar charts:
 * Number of trips per weekday
 * Trip durations per week

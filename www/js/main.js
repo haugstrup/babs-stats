@@ -4,6 +4,7 @@ require.config({
     underscore: 'vendor/underscore-min',
     moment: 'vendor/moment.min',
     sparkline: 'vendor/jquery.sparkline.min',
+    tipsy: 'vendor/jquery.tipsy',
     babs: 'lib/babs'
   },
   shim: {
@@ -11,7 +12,7 @@ require.config({
       exports: '_'
     },
     'app': {
-      deps: ['underscore', 'jquery', 'moment', 'sparkline']
+      deps: ['underscore', 'jquery', 'moment', 'sparkline', 'tipsy']
     }
   }
 });
