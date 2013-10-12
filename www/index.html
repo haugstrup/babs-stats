@@ -18,25 +18,7 @@
       </header>
 
       <div class="no-margin tile-1 tile basic-stats">
-        <dl>
-          <dt>Number of trips</dt>
-          <dd id="total"></dd>
-          <dt>Total time biking</dt>
-          <dd id="total-duration"></dd>
-          <dt>First trip date</dt>
-          <dd id="first"></dd>
-          <dt>Stations visited</dt>
-          <dd id="station-count"></dd>
-        </dl>
-        <dl>
-          <dt>Shortest trip</dt>
-          <dd id="shortest"></dd>
-          <dt>Longest trip</dt>
-          <dd id="longest"></dd>
-          <dt>Average trip</dt>
-          <dd id="average-duration"></dd>
-        </dl>
-
+        <div id="basic"></div>
       </div>
       <div class="tile-2 tile trip-summary-tile">
         <h2>Most Recent Trip</h2>
@@ -53,6 +35,11 @@
       </div>
 
       <div id="map" class="tile tile-2 no-margin map-tile"></div>
+
+      <div class="tile tile-1">
+        <h2>Weekly Trip Durations</h2>
+        <div id="weekly-durations"></div>
+      </div>
 
       <footer>
         Made by <a href="http://solitude.dk/">Andreas Haugstrup Pedersen</a>. I'm not affiliated with <a href="http://bayareabikeshare.com">Bay Area Bike Share</a>. Just a big fan.

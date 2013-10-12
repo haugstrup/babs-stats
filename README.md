@@ -45,6 +45,5 @@ Then you can fetch new trip data, optimize and transfer files with `grunt deploy
 * Split babs.rb and babs.js into separate components for people that only want an API
 * Rewrite babs.rb as a node.js module so everything is in javascript. Module should export a grunt task
 
-Possible bar charts:
-* Number of trips per weekday
+Possible line charts:
 * Trip durations per week

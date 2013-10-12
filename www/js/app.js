@@ -6,6 +6,7 @@ define(['babs'], function(Babs) {
       this.updated_on = moment.utc(data.updated_on);
       this.account_created_on = data.account_created_on;
       this.account_name = data.account_name;
+      this.area = data.area;
 
       this.trips = new Babs({trips: data.trips, stations: data.stations});
 
@@ -18,6 +19,7 @@ define(['babs'], function(Babs) {
       this.populatePopularStations(this.trips.topStations());
 
       this.populateMap();
+      this.populateWeeklyDurations();
 
       $('.tooltip').tipsy({
         gravity: 's'
@@ -32,6 +34,12 @@ define(['babs'], function(Babs) {
     barChartTemplate: _.template('<div class="bar-chart tooltip" title="<%= value %>% of trips involved this station"><div class="bar" style="width:<%= value %>%;"></div><div class="label"><%= label %></div></div>'),
 
     tripSummaryTemplate: _.template('<div class="trip-summary"><div class="route start"><%= start %></div><div class="route middle">&darr;</div><div class="route end"><%= end %></div><div class="duration"><%= duration %></div><div class="date"><%= date %></div></div>'),
+
+    basicDataTemplate: _.template("<dl><dt>Number of trips</dt><dd><%= total %></dd><dt>Total time biking</dt><dd><%= duration %></dd><dt>First trip date</dt><dd><%= first %></dd><dt>Stations visited</dt><dd><%= count %></dd></dl><dl><dt>Shortest trip</dt><dd><%= shortest %></dd><dt>Longest trip</dt><dd><%= longest %></dd><dt>Average trip</dt><dd><%= average %></dd></dl>"),
+
+    populateWeeklyDurations: function() {
+
+    },
 
     populateMap: function() {
 
@@ -85,6 +93,7 @@ define(['babs'], function(Babs) {
     },
 
     populateBasicData: function() {
+      var self = this;
       var tripsByDuration = this.trips.byDuration();
       var shortest = tripsByDuration.shift();
       var longest = tripsByDuration.pop();
@@ -96,15 +105,17 @@ define(['babs'], function(Babs) {
       var totalStationCount = this.trips.totalStationCount();
       var pie = "<div class='pie'>" + [visitedStationCount, totalStationCount-visitedStationCount].join(',') + "</div>";
 
-      $('#total').text(this.trips.count() + ' trips');
-      $('#average-duration').text(this.trips.averageDuration() + ' mins');
-      $('#shortest').html('<span class="tooltip" title="'+shortest.start_station+' &rarr; '+shortest.end_station+'">' + this.secondsToString(shortest.duration) + '</span>');
-      $('#longest').html('<span class="tooltip" title="'+longest.start_station+' &rarr; '+longest.end_station+'">' + this.secondsToString(longest.duration) + '</span>');
-      $('#first').html('<span class="tooltip" title="'+longest.start_station+' &rarr; '+longest.end_station+'">' + moment(first.start_date).format('MMM D, YYYY') + '</span>');
-      $('#total-duration').html(this.secondsToString(this.trips.duration()));
-      $('#station-count').html(pie);
+      $('#basic').html(this.basicDataTemplate({
+        total: this.trips.count() + ' trips',
+        duration: this.secondsToString(this.trips.duration()),
+        first: '<span class="tooltip" title="'+longest.start_station+' &rarr; '+longest.end_station+'">' + moment(first.start_date).format('MMM D, YYYY') + '</span>',
+        count: pie,
+        shortest: '<span class="tooltip" title="'+shortest.start_station+' &rarr; '+shortest.end_station+'">' + this.secondsToString(shortest.duration) + '</span>',
+        longest: '<span class="tooltip" title="'+longest.start_station+' &rarr; '+longest.end_station+'">' + this.secondsToString(longest.duration) + '</span>',
+        average: this.trips.averageDuration() + ' mins'
+      }));
 
-      $('#station-count div.pie').sparkline('html', {
+      $('#basic div.pie').sparkline('html', {
         type: 'pie',
         height:25,
         sliceColors: ['#82C7BC', '#dddddd'],
@@ -112,9 +123,9 @@ define(['babs'], function(Babs) {
         disableHighlight: true,
         tooltipFormatter: function(sparklines, options, fields) {
           if (fields.offset === 0) {
-            return fields.value + ' stations visited ('+Math.round(fields.percent)+'%)';
+            return fields.value + ' stations visited in '+self.area+' ('+Math.round(fields.percent)+'%)';
           } else {
-            return fields.value + ' stations not yet visited ('+Math.round(fields.percent)+'%)';
+            return fields.value + ' stations not yet visited in '+self.area+' ('+Math.round(fields.percent)+'%)';
           }
         }
       });

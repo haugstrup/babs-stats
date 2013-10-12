@@ -61,6 +61,7 @@ json = {
   'updated_on' => Time.now.utc.strftime('%Y-%m-%d %H:%M:%S'),
   'account_created_on' => created_on,
   'account_name' => name,
+  'area' => station_area,
   'trips' => trips,
   'stations' => stations_raw['stationBeanList'].map{|s| {
     'name' => s['stationName'],
