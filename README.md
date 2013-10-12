@@ -31,6 +31,10 @@ There's a small JS app that will display your stats for you. Currently the follo
 
 Since the data file is loaded asynchronously you can't server the HTML file under `file://`. So start a simple HTTP server in `www` with `python -m SimpleHTTPServer` or whatever and load up `localhost:8000`.
 
+## Deploying to a webserver
+There are grunt tasks for optmizing JS/CSS with requirejs and deploying to a webserver using rsync. For deployment to work you must define an ENV variable called `BABS_RSYNC_TARGET`. It should (surprise, surprise) be the `target` value for rsync.
+
+Then you can fetch new trip data, optimize and transfer files with `grunt deploy`
 
 # TODO
 
@@ -43,6 +47,3 @@ Possible bar charts:
 
 Map:
 * View visited stations on a google map
-
-Grunt work:
-* deploy -- rsync/scp www files to server
