@@ -65,7 +65,7 @@ json = {
   'stations' => stations_raw['stationBeanList'].map{|s| {
     'name' => s['stationName'],
     'latitude' => s['latitude'],
-    'longtitude' => s['longtitude'],
+    'longitude' => s['longitude'],
     'id' => s['id']
   }}
 }

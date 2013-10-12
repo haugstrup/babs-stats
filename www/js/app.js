@@ -17,6 +17,8 @@ define(['babs'], function(Babs) {
       this.populatePopularRoutes(this.trips.topRoutes());
       this.populatePopularStations(this.trips.topStations());
 
+      this.populateMap();
+
       $('.tooltip').tipsy({
         gravity: 's'
       });
@@ -30,6 +32,50 @@ define(['babs'], function(Babs) {
     barChartTemplate: _.template('<div class="bar-chart tooltip" title="<%= value %>% of trips involved this station"><div class="bar" style="width:<%= value %>%;"></div><div class="label"><%= label %></div></div>'),
 
     tripSummaryTemplate: _.template('<div class="trip-summary"><div class="route start"><%= start %></div><div class="route middle">&darr;</div><div class="route end"><%= end %></div><div class="duration"><%= duration %></div><div class="date"><%= date %></div></div>'),
+
+    populateMap: function() {
+
+      var visitedStations = _.uniq(this.trips.stationList());
+
+      this.map = new google.maps.Map($('#map').get(0), {
+        center: new google.maps.LatLng(37.788975, -122.403452),
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        panControl: false,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        overviewMapControl: false
+      });
+
+      var pinIconVisited = new google.maps.MarkerImage(
+          "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|82C7BC",
+          null, /* size is determined at runtime */
+          null, /* origin is 0,0 */
+          null, /* anchor is bottom center of the scaled image */
+          new google.maps.Size(18, 30)
+      );
+
+      var pinIcon = new google.maps.MarkerImage(
+          "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|ccc",
+          null, /* size is determined at runtime */
+          null, /* origin is 0,0 */
+          null, /* anchor is bottom center of the scaled image */
+          new google.maps.Size(18, 30)
+      );
+
+      var markers = [];
+      _.each(this.trips.stations, function(station){
+        markers.push(new google.maps.Marker({
+          position: new google.maps.LatLng(station.latitude, station.longitude),
+          map: this.map,
+          title: station.name,
+          icon: _.include(visitedStations, station.name) ? pinIconVisited : pinIcon
+        }));
+      }, this);
+
+    },
 
     populateMeta: function() {
       $('#meta').html(this.metaTemplate({

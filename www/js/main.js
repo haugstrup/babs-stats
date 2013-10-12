@@ -1,5 +1,6 @@
 require.config({
   paths: {
+    async: 'vendor/async',
     jquery: 'vendor/jquery.min',
     underscore: 'vendor/underscore-min',
     moment: 'vendor/moment.min',
@@ -18,7 +19,7 @@ require.config({
   }
 });
 
-require(['app', 'sparkline'], function(app) {
+require(['app', 'sparkline', 'async!https://maps.googleapis.com/maps/api/js?sensor=false!callback'], function(app) {
 
   $.getJSON('babs.json', {}, function(data){
     app.init(data);

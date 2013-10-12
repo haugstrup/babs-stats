@@ -56,6 +56,14 @@ h2 {
   width:655px;
 }
 
+.tile-3 {
+  width:960px;
+}
+
+.map-tile {
+  height:295px;
+}
+
 .no-margin {
   margin-left:0;
   clear:left;

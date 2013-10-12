@@ -1,10 +1,14 @@
-# Work-in-progress. The stats display is very much ugly at the moment. Must learn design skills!
+# Warning: Work-in-progress. Expect ugly things.
 
 # Bay Area Bike Share (BABS) Stats Generator
 
 This is the first rough version of a stats generator for Bay Area Bike Share (BABS). BABS doesn't have a public API, but they do make trip data available on their website. Thus it's possible to scrape that data and convert it into a useful format such as JSON.
 
 Note: BABS is run by [Alta Bicycle Share](http://www.altabicycleshare.com/) and it's possible that the same web portal is used for for the systems they run in other cities such as New York's *city bike*, Boston's *Hubway*, Washington DC's *capital bikeshare*, Chicago's *Divvy* and others.
+
+## Examples
+
+* [http://babs.hgstrp.com/](http://babs.hgstrp.com/)
 
 ## Scraping trip data
 You'll find a handy ruby script in `utils/babs.rb`. This scrapes trip data and converts it into JSON. For now the JSON file is just placed  directly into `www/babs.json`. You must have the follow ENV variables set:
@@ -44,6 +48,3 @@ Then you can fetch new trip data, optimize and transfer files with `grunt deploy
 Possible bar charts:
 * Number of trips per weekday
 * Trip durations per week
-
-Map:
-* View visited stations on a google map
