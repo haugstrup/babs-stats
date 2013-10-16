@@ -46,6 +46,7 @@ h2 {
   border-radius:5px;
   border:1px solid #ccc;
   padding:15px;
+  height:302px;
 }
 
 .tile-1 {
@@ -61,7 +62,7 @@ h2 {
 }
 
 .map-tile {
-  height:295px;
+  height:302px;
 }
 
 .no-margin {
@@ -180,7 +181,7 @@ footer a, footer a:visited {
 
 .trip-summary .date,
 .trip-summary .duration {
-  margin-top:20px;
+  margin-top:30px;
   font-size:11px;
   line-height:11px;
   color:#999;
@@ -189,4 +190,7 @@ footer a, footer a:visited {
 }
 .trip-summary .duration {
   float:right;
+}
+#weekly-durations {
+  margin-top:20px;
 }

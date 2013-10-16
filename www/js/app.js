@@ -66,7 +66,7 @@ define(['babs'], function(Babs) {
         colors: ['#82C7BC'],
         height:215,
         width:278,
-        chartArea: {top:5, left:50, width:210, height:175},
+        chartArea: {top:5, left:40, width:220, height:175},
         legend:{position:'none'},
         hAxis: {},
         vAxis: {minValue:0}
