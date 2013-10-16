@@ -47,6 +47,3 @@ Then you can fetch new trip data, optimize and transfer files with `grunt deploy
 
 * Make tiles the same height
 * Adjust babs.js so we don't loop over collection more than necessary. Store sorted sets as properties etc.
-
-Possible line charts:
-* Trip durations per week
