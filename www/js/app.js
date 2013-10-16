@@ -39,6 +39,38 @@ define(['babs'], function(Babs) {
 
     populateWeeklyDurations: function() {
 
+      var durations = {};
+      _.each(this.trips.trips, function(trip){
+        var week = moment(trip.start_date).format('W');
+        if (durations[week]) {
+          durations[week] = durations[week] + trip.duration;
+        } else {
+          durations[week] = trip.duration;
+        }
+      });
+      var weeks = _.keys(durations);
+      var data = [];
+      for (i=_.min(weeks); i<=_.max(weeks); i++) {
+        data.push(['Week '+i.toString(), Math.round(durations[i]/60)]);
+      }
+
+      data.unshift(['Week', 'Trip durations']);
+      var dataTable = google.visualization.arrayToDataTable(data);
+
+      var formatter = new google.visualization.NumberFormat({suffix: ' min', fractionDigits: 0});
+      formatter.format(dataTable, 1);
+
+      var chart = new google.visualization.LineChart($('#weekly-durations').get(0));
+      chart.draw(dataTable, {
+        curveType:'none',
+        colors: ['#82C7BC'],
+        height:215,
+        width:278,
+        chartArea: {top:5, left:50, width:210, height:175},
+        legend:{position:'none'},
+        hAxis: {},
+        vAxis: {minValue:0}
+      });
     },
 
     populateMap: function() {

@@ -1,6 +1,8 @@
 require.config({
   paths: {
-    async: 'vendor/async',
+    propertyParser: 'vendor/require/propertyParser',
+    goog: 'vendor/require/goog',
+    async: 'vendor/require/async',
     jquery: 'vendor/jquery.min',
     underscore: 'vendor/underscore-min',
     moment: 'vendor/moment.min',
@@ -19,7 +21,7 @@ require.config({
   }
 });
 
-require(['app', 'sparkline', 'async!https://maps.googleapis.com/maps/api/js?sensor=false!callback'], function(app) {
+require(['app', 'sparkline', 'goog!visualization,1,packages:[corechart]', 'async!https://maps.googleapis.com/maps/api/js?sensor=false!callback'], function(app) {
 
   $.getJSON('babs.json', {}, function(data){
     app.init(data);

@@ -45,5 +45,8 @@ Then you can fetch new trip data, optimize and transfer files with `grunt deploy
 * Split babs.rb and babs.js into separate components for people that only want an API
 * Rewrite babs.rb as a node.js module so everything is in javascript. Module should export a grunt task
 
+* Make tiles the same height
+* Adjust babs.js so we don't loop over collection more than necessary. Store sorted sets as properties etc.
+
 Possible line charts:
 * Trip durations per week
