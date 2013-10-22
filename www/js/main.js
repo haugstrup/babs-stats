@@ -14,6 +14,7 @@ require.config({
     'underscore': {
       exports: '_'
     },
+    'tipsy': ['jquery'],
     'sparkline': ['jquery'],
     'app': {
       deps: ['underscore', 'jquery', 'moment', 'sparkline', 'tipsy']

@@ -45,6 +45,8 @@ Then you can fetch new trip data, optimize and transfer files with `grunt deploy
 * Split babs.rb and babs.js into separate components for people that only want an API
 * Rewrite babs.rb as a node.js module so everything is in javascript. Module should export a grunt task
 
+* Handle invalid stations (such as the warehouse). Only the pie chart is affected for now
+
 * "Latest trip" tile: Make it into a carousel where one can navigate the latest 10 trips or so
   * Also strip parenthesis content from station names on that tile
 * Adjust babs.js so we don't loop over collection more than necessary. Store sorted sets as properties etc.

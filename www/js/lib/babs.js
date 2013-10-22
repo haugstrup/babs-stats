@@ -74,7 +74,7 @@ define(function() {
     this.topRoutes = function() {
       var routes = {};
 
-      _.each(trips, function(trip) {
+      _.each(this.byId(), function(trip) {
         var stations = [trip.start_station, trip.end_station];
         var key = stations.join('::');
         if (routes[key]) {
