@@ -39,11 +39,20 @@ define(function() {
       return stations.length;
     },
 
+    this.validStationNames = function() {
+      return _.pluck(stations, 'name');
+    },
+
     this.stationList = function() {
+      var validStations = this.validStationNames();
       var stations = [];
       _.each(trips, function(station){
-        stations.push(station.start_station);
-        stations.push(station.end_station);
+        if (_.contains(validStations, station.start_station)) {
+          stations.push(station.start_station);
+        }
+        if (_.contains(validStations, station.end_station)) {
+          stations.push(station.end_station);
+        }
       });
       return stations;
     },
