@@ -31,7 +31,7 @@ define(['babs'], function(Babs) {
 
     metaTemplate: _.template('Prepared for <%= name %>. Last updated <%= updated_on.fromNow() %>.'),
 
-    barChartTemplate: _.template('<div class="bar-chart tooltip" title="<%= value %>% of trips involved this station"><div class="bar" style="width:<%= value %>%;"></div><div class="label"><%= label %></div></div>'),
+    barChartTemplate: _.template('<div class="bar-chart tooltip" title="<%= value %>% of trips involved this station (<%= valueRaw %> trips)"><div class="bar" style="width:<%= value %>%;"></div><div class="label"><%= label %></div></div>'),
 
     tripSummaryTemplate: _.template('<div class="trip-summary"><div class="route start"><%= start %></div><div class="route middle">&darr;</div><div class="route end"><%= end %></div><div class="duration"><%= duration %></div><div class="date"><%= date %></div></div>'),
 
@@ -216,7 +216,11 @@ define(['babs'], function(Babs) {
     populatePopularStations: function(topStations) {
       var html = [];
       _.each(topStations, function(station){
-        html.push(this.barChartTemplate({label: station.name, value: Math.round((station.count/this.trips.count())*100)}));
+        html.push(this.barChartTemplate({
+          label: station.name,
+          valueRaw: station.count,
+          value: Math.round((station.count/this.trips.count())*100)
+        }));
       }, this);
       $('#popular-stations').html(html.join(''));
     },
