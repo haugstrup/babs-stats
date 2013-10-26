@@ -3,7 +3,7 @@ define(function() {
   require('underscore');
 
   return function(options) {
-    var trips = options.trips || [];
+    var trips = _.sortBy(options.trips, function(trip){ return trip.id; });
     this.trips = trips;
 
     var stations = options.stations || [];
@@ -26,12 +26,6 @@ define(function() {
     this.byDuration = function() {
       return _.sortBy(trips, function(trip){
         return trip.duration;
-      });
-    },
-
-    this.byId = function() {
-      return _.sortBy(trips, function(trip){
-        return trip.id;
       });
     },
 
@@ -83,7 +77,7 @@ define(function() {
     this.topRoutes = function() {
       var routes = {};
 
-      _.each(this.byId(), function(trip) {
+      _.each(trips, function(trip) {
         var stations = [trip.start_station, trip.end_station];
         var key = stations.join('::');
         if (routes[key]) {

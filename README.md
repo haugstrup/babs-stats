@@ -53,5 +53,4 @@ Then you can fetch new trip data, optimize and transfer files with `grunt deploy
 
 * "Latest trip" tile: Make it into a carousel where one can navigate the latest 10 trips or so
   * Also strip parenthesis content from station names on that tile
-* Adjust babs.js so we don't loop over collection more than necessary. Store sorted sets as properties etc.
 * Make display of all trips

@@ -130,8 +130,7 @@ define(['babs'], function(Babs) {
       var shortest = tripsByDuration.shift();
       var longest = tripsByDuration.pop();
 
-      var tripsById = this.trips.byId();
-      var first = tripsById.shift();
+      var first = _.clone(this.trips.trips).shift();
 
       var visitedStationCount = this.trips.visitedStationCount();
       var totalStationCount = this.trips.totalStationCount();
@@ -165,8 +164,7 @@ define(['babs'], function(Babs) {
     },
 
     populateLatestTrip: function() {
-      var tripsById = this.trips.byId();
-      var trip = tripsById.pop();
+      var trip = _.clone(this.trips.trips).pop();
 
       $('#latest').html(this.tripSummaryTemplate({
         start: trip.start_station,
