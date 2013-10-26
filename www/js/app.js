@@ -8,22 +8,23 @@ define(['babs'], function(Babs) {
       this.account_name = data.account_name;
       this.area = data.area;
 
-      this.trips = new Babs({trips: data.trips, stations: data.stations});
+      if (data.trips.length) {
+        this.trips = new Babs({trips: data.trips, stations: data.stations});
+        // Populate HTML elements
+        this.populateMeta();
 
-      // Populate HTML elements
-      this.populateMeta();
+        this.populateBasicData();
+        this.populateLatestTrip();
+        this.populatePopularRoutes(this.trips.topRoutes());
+        this.populatePopularStations(this.trips.topStations());
 
-      this.populateBasicData();
-      this.populateLatestTrip();
-      this.populatePopularRoutes(this.trips.topRoutes());
-      this.populatePopularStations(this.trips.topStations());
+        this.populateMap();
+        this.populateWeeklyDurations();
 
-      this.populateMap();
-      this.populateWeeklyDurations();
-
-      $('.tooltip').tipsy({
-        gravity: 's'
-      });
+        $('.tooltip').tipsy({
+          gravity: 's'
+        });
+      }
 
     },
 

@@ -1,5 +1,3 @@
-# Warning: Work-in-progress. Expect ugly things.
-
 # Bay Area Bike Share (BABS) Stats Generator
 
 This is the first rough version of a stats generator for Bay Area Bike Share (BABS). BABS doesn't have a public API, but they do make trip data available on their website. Thus it's possible to scrape that data and convert it into a useful format such as JSON.
@@ -8,7 +6,7 @@ Note: BABS is run by [Alta Bicycle Share](http://www.altabicycleshare.com/) and 
 
 ## Before doing anything
 
-Run `npm install` to grab dependencies. Otherwise not much will work.
+Make sure you have node and npm installed. Run `npm install` to grab dependencies. Otherwise not much will work.
 
 ## Examples
 
@@ -39,6 +37,8 @@ There's a small JS app that will display your stats for you. Currently the follo
 
 Since the data file is loaded asynchronously you can't server the HTML file under `file://`. A small server script is included. Run it with `node server.js` and then hit up [http://localhost:8000](http://localhost:8000)
 
+If you want to see other numbers create an issue or a pull request.
+
 ## Deploying to a webserver
 There are grunt tasks for optmizing JS/CSS with requirejs and deploying to a webserver using rsync. For deployment to work you must define an ENV variable called `BABS_RSYNC_TARGET`. It should (surprise, surprise) be the `target` value for rsync.
 
@@ -46,7 +46,6 @@ Then you can fetch new trip data, optimize and transfer files with `grunt deploy
 
 # TODO
 
-* Split babs.rb and babs.js into separate components for people that only want an API
 * Rewrite babs.rb as a node.js module so everything is in javascript. Module should export a grunt task
 
 * "Latest trip" tile: Make it into a carousel where one can navigate the latest 10 trips or so

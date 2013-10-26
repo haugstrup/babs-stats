@@ -50,7 +50,7 @@ stations_raw = Oj.load(Net::HTTP.get(stations_url))
 stations_raw['stationBeanList'].keep_if {|station| station['landMark'] == station_area }
 station_count = stations_raw['stationBeanList'].length
 
-json = {trips => []}
+json = {'trips' => []}
 if File.file?(json_path)
   json = Oj.load(File.open(json_path, 'rb') {|io| io.read})
 end
@@ -84,6 +84,7 @@ trips.each do |trip|
   else
     trip_count_new += 1
     print "##{trip['id']} Adding new trip\n"
+    json['trips'] << trip
   end
 end
 
