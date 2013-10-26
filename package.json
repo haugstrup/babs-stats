@@ -2,6 +2,7 @@
   "name": "babs-stats",
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-requirejs": "~0.4.1"
+    "grunt-contrib-requirejs": "~0.4.1",
+    "connect": "~2.10.1"
   }
 }

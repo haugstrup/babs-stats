@@ -6,6 +6,10 @@ This is the first rough version of a stats generator for Bay Area Bike Share (BA
 
 Note: BABS is run by [Alta Bicycle Share](http://www.altabicycleshare.com/) and it's possible that the same web portal is used for for the systems they run in other cities such as New York's *city bike*, Boston's *Hubway*, Washington DC's *capital bikeshare*, Chicago's *Divvy* and others.
 
+## Before doing anything
+
+Run `npm install` to grab dependencies. Otherwise not much will work.
+
 ## Examples
 
 * [http://babs.hgstrp.com/](http://babs.hgstrp.com/)
@@ -33,7 +37,7 @@ There's a small JS app that will display your stats for you. Currently the follo
 * Most popular routes (with average duration and trip count)
 * Most popular stations employed
 
-Since the data file is loaded asynchronously you can't server the HTML file under `file://`. So start a simple HTTP server in `www` with `python -m SimpleHTTPServer` or whatever and load up `localhost:8000`.
+Since the data file is loaded asynchronously you can't server the HTML file under `file://`. A small server script is included. Run it with `node server.js` and then hit up [http://localhost:8000](http://localhost:8000)
 
 ## Deploying to a webserver
 There are grunt tasks for optmizing JS/CSS with requirejs and deploying to a webserver using rsync. For deployment to work you must define an ENV variable called `BABS_RSYNC_TARGET`. It should (surprise, surprise) be the `target` value for rsync.
@@ -45,7 +49,7 @@ Then you can fetch new trip data, optimize and transfer files with `grunt deploy
 * Split babs.rb and babs.js into separate components for people that only want an API
 * Rewrite babs.rb as a node.js module so everything is in javascript. Module should export a grunt task
 
-* Handle invalid stations (such as the warehouse). Only the pie chart is affected for now
+* babs.rb -- shouldn't update trips already in the collection. I.e. parse the data file and only add new trips
 
 * "Latest trip" tile: Make it into a carousel where one can navigate the latest 10 trips or so
   * Also strip parenthesis content from station names on that tile
