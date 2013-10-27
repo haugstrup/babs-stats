@@ -34,7 +34,9 @@ define(['babs'], function(Babs) {
 
     barChartTemplate: _.template('<div class="bar-chart tooltip" title="<%= value %>% of trips involved this station (<%= valueRaw %> trips)"><div class="bar" style="width:<%= value %>%;"></div><div class="label"><%= label %></div></div>'),
 
-    tripSummaryTemplate: _.template('<div class="trip-summary"><div class="route start"><%= start %></div><div class="route middle">&darr;</div><div class="route end"><%= end %></div><div class="duration"><%= duration %></div><div class="date"><%= date %></div></div>'),
+    tripSummaryTemplate: _.template('<div class="trip-summaries"><div class="inner"><% _.each(trips, function(trip){ %><div class="trip-summary"><div class="route start"><%= trip.start %></div><div class="route middle">&darr;</div><div class="route end"><%= trip.end %></div><div class="duration"><%= trip.duration %></div><div class="date"><%= trip.date %></div></div><% }) %></div></div>'),
+
+    arrowTemplate: _.template('<div class="arrow left"><div class="inner"></div></div><div class="arrow right hidden"><div class="inner"></div></div>'),
 
     basicDataTemplate: _.template("<dl><dt>Number of trips</dt><dd><%= total %></dd><dt>Total time biking</dt><dd><%= duration %></dd><dt>First trip date</dt><dd><%= first %></dd><dt>Stations visited</dt><dd><%= count %></dd></dl><dl><dt>Shortest trip</dt><dd><%= shortest %></dd><dt>Longest trip</dt><dd><%= longest %></dd><dt>Average trip</dt><dd><%= average %></dd></dl>"),
 
@@ -165,15 +167,48 @@ define(['babs'], function(Babs) {
     },
 
     populateLatestTrip: function() {
-      var trip = _.clone(this.trips.trips).pop();
+      var trips = this.trips.trips.slice(-10);
+      var formattedTrips = _.map(trips, function(trip){
+        return {
+          start: trip.start_station.replace(/ \(.+\)/, ''),
+          end: trip.end_station.replace(/ \(.+\)/, ''),
+          date: moment(trip.start_date).format('MMM D, YYYY'),
+          duration: this.secondsToString(trip.duration, 'verbose')
+        };
+      }, this);
 
-      $('#latest').html(this.tripSummaryTemplate({
-        start: trip.start_station,
-        end: trip.end_station,
-        date: moment(trip.start_date).format('MMM D, YYYY'),
-        duration: this.secondsToString(trip.duration, 'verbose')
-      }));
+      var summaryHTML = this.tripSummaryTemplate({
+        trips: formattedTrips
+      });
 
+      $('#latest').html(this.arrowTemplate() + summaryHTML);
+
+      // The simplest carousel
+      var elmCarousel = $('#latest .trip-summaries .inner');
+      var elmArrowRight = $('#latest .arrow.right');
+      var elmArrowLeft = $('#latest .arrow.left');
+
+      var stepMultiplier = elmCarousel.width();
+      var steps = trips.length-1;
+      var currentStep = steps;
+
+      elmCarousel.css({left:steps*stepMultiplier*-1});
+      $('#latest .arrow').click(function(){
+        if ($(this).hasClass('left')) {
+          currentStep--;
+        } else {
+          currentStep++;
+        }
+        elmCarousel.animate({'left': currentStep*stepMultiplier*-1}, 300);
+        if (currentStep >= steps) {
+          elmArrowRight.hide();
+        } else if (currentStep === 0) {
+          elmArrowLeft.hide();
+        } else {
+          elmArrowRight.show();
+          elmArrowLeft.show();
+        }
+      });
     },
 
     populatePopularRoutes: function(topRoutes) {

@@ -4,6 +4,7 @@ require 'mechanize'
 require 'nokogiri'
 require 'oj'
 
+# Settings
 username = ENV['BABS_USER']
 password = ENV['BABS_PASS']
 url      = 'https://bayareabikeshare.com/login'
@@ -15,6 +16,7 @@ agent = Mechanize.new { |agent|
   agent.user_agent_alias = 'Mac Safari'
 }
 
+# Login to babs
 page = agent.get(url)
 login_form = page.forms.first
 login_form.subscriberUsername = username
@@ -22,10 +24,12 @@ login_form.subscriberPassword = password
 
 page = agent.submit(login_form, login_form.buttons.first)
 
+# Grab profile info
 profile_tables = page.search('table.member-profile')
 created_on = profile_tables[1].search('tr')[1].search('td')[0].text.strip
 name = profile_tables[2].search('tr')[0].search('td')[0].text.strip
 
+# Grab trips
 page = page.link_with(:text => 'Trips').click
 
 trips_table = page.search('#content table tbody tr')
@@ -46,16 +50,18 @@ trips = trips_table.map do |tr|
   }
 end
 
+# Grab stations
 stations_raw = Oj.load(Net::HTTP.get(stations_url))
 stations_raw['stationBeanList'].keep_if {|station| station['landMark'] == station_area }
 station_count = stations_raw['stationBeanList'].length
 
+# Load current json data file
 json = {'trips' => []}
 if File.file?(json_path)
   json = Oj.load(File.open(json_path, 'rb') {|io| io.read})
 end
 
-# Update data
+# Update basic data
 json.merge!({
   'updated_on' => Time.now.utc.strftime('%Y-%m-%d %H:%M:%S'),
   'account_created_on' => created_on,
@@ -69,6 +75,7 @@ json.merge!({
   }}
 })
 
+# Update trips
 trip_count_new = 0
 trip_count_discarded = 0
 trip_count_existing = 0
@@ -88,6 +95,7 @@ trips.each do |trip|
   end
 end
 
+# Write file and exit
 File.open(json_path, 'wb') {|f| f.write( Oj.dump(json) ) }
 print "\n=================================\n"
 print "Found #{station_count} stations in #{station_area}.\n"

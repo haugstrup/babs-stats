@@ -29,11 +29,12 @@ Run it with grunt `grunt fetch`
 ## Viewing your stats
 There's a small JS app that will display your stats for you. Currently the following data is generated:
 
-* Amount of trips taken
-* Total time spent biking
-* Average trip duration
-* Most popular routes (with average duration and trip count)
-* Most popular stations employed
+* Basic info (no. of trips, total duration, shortest & longest trips etc.)
+* Latest trips taken with date and duration
+* Most popular routes
+* Weekly usage
+* Google Map showing visited stations
+* Most popular stations
 
 Since the data file is loaded asynchronously you can't server the HTML file under `file://`. A small server script is included. Run it with `node server.js` and then hit up [http://localhost:8000](http://localhost:8000)
 
@@ -47,6 +48,3 @@ Then you can fetch new trip data, optimize and transfer files with `grunt deploy
 # TODO
 
 * Rewrite babs.rb as a node.js module so everything is in javascript. Module should export a grunt task
-
-* "Latest trip" tile: Make it into a carousel where one can navigate the latest 10 trips or so
-  * Also strip parenthesis content from station names on that tile

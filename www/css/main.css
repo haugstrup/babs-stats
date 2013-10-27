@@ -164,9 +164,23 @@ footer a, footer a:visited {
   line-height:35px;
 }
 
-.trip-summary {
+.trip-summaries {
   padding-top:10px;
+  height:215px;
+  white-space:nowrap;
+  overflow:hidden;
+}
+.trip-summaries .inner {
+  position:relative;
+}
+.trip-summary-tile {
+  position:relative;
+}
+.trip-summary {
+  overflow:hidden;
   text-align:center;
+  display:inline-block;
+  width:623px;
 }
 .trip-summary .route {
   font-size:44px;
@@ -191,6 +205,50 @@ footer a, footer a:visited {
 .trip-summary .duration {
   float:right;
 }
+.arrow {
+  z-index:2;
+  position:absolute;
+  top:50%;
+  margin-top:-10px;
+  width:0;
+  height:0;
+  cursor:pointer;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+.arrow .inner {
+  position:absolute;
+  top:-20px;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+.arrow.left .inner {
+  left:4px;
+  border-right:15px solid #fff;
+}
+.arrow.right .inner {
+  right:4px;
+  border-left:15px solid #fff;
+}
+.arrow.left {
+  left:10px;
+  border-right:15px solid #eee;
+}
+.arrow.left:hover {
+  border-right-color:#999;
+}
+.arrow.right {
+  right:10px;
+  border-left:15px solid #eee;
+}
+.arrow.right:hover {
+  border-left-color:#999;
+}
+
 #weekly-durations {
   margin-top:20px;
+}
+
+.hidden {
+  display:none;
 }
