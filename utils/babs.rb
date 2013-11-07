@@ -38,16 +38,23 @@ trips = trips_table.map do |tr|
   duration_raw = row[5].text.chomp('m').chomp('s').split(' ')
   duration = (duration_raw[0].to_i*60) + duration_raw[1].to_i
 
-  {
-    'id' => row[0].text.to_i,
-    'start_date' => Date.strptime(row[2].text, '%m/%d/%y').strftime('%Y-%m-%d'),
-    'end_date' => Date.strptime(row[4].text, '%m/%d/%y').strftime('%Y-%m-%d'),
-    'start_station' => row[1].text,
-    'end_station' => row[3].text,
-    # 'start_station' => row[1].text.gsub(/ \(.+\)/, ''),
-    # 'end_station' => row[3].text.gsub(/ \(.+\)/, ''),
-    'duration' => duration
-  }
+  if row[3].text.length > 0
+    {
+      'id' => row[0].text.to_i,
+      'start_date' => Date.strptime(row[2].text, '%m/%d/%y').strftime('%Y-%m-%d'),
+      'end_date' => Date.strptime(row[4].text, '%m/%d/%y').strftime('%Y-%m-%d'),
+      'start_station' => row[1].text,
+      'end_station' => row[3].text,
+      'duration' => duration
+    }
+  else
+    {
+      'id' => row[0].text.to_i,
+      'start_date' => Date.strptime(row[2].text, '%m/%d/%y').strftime('%Y-%m-%d'),
+      'start_station' => row[1].text,
+      'duration' => 1
+    }
+  end
 end
 
 # Grab stations
@@ -85,6 +92,9 @@ trips.each do |trip|
   if existing_trips.include?(trip['id'])
     trip_count_existing += 1
     print "##{trip['id']} Skipping existing trip\n"
+  elsif !trip['end_station']
+    trip_count_discarded += 1
+    print "##{trip['id']} WARNING! No end station found!\n"
   elsif trip['duration'] < 60
     trip_count_discarded += 1
     print "##{trip['id']} Skipping trip under 1 min\n"
